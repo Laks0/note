@@ -12,7 +12,7 @@ case "$1" in
 esac
 
 nombre="$1"\ 
-fecha=$(date +"%d-%m-%y")
+fecha=$(date +"%y-%m-%d")
 test "$1" = "" && titulo=$fecha || titulo="$nombre"$fecha
 
 $EDITOR "$titulo"
