@@ -1,5 +1,6 @@
 #!/bin/sh
-cd ~/Documents/notas
+directorio="~/Documents/notas"
+cd $directorio
 
 if [ $1 = "-l" ]; then
 	for f in *; do
@@ -8,8 +9,18 @@ if [ $1 = "-l" ]; then
 	exit 0
 fi
 
-nombre="$1"
+if [ $1 = "-o" ]; then
+	$EDITOR "$2"
+	exit 0
+fi
+
+if [ $1 = "-r" ]; then
+	rm "$2"
+	exit 0
+fi
+
+nombre="$1"\ 
 fecha=$(date +"%d-%m-%y")
-titulo="$nombre"\ $fecha
+[ $nombre = \  ] && titulo=$fecha || titulo="$nombre"$fecha
 
 $EDITOR "$titulo"
