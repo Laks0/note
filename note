@@ -1,0 +1,8 @@
+#!/bin/sh
+cd ~/Documents/notas
+
+nombre="$1"
+fecha=$(date +"%d-%m-%y")
+titulo="$nombre"\ $fecha
+
+$EDITOR "$titulo"
