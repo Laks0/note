@@ -1,6 +1,13 @@
 #!/bin/sh
 cd ~/Documents/notas
 
+if [ $1 = "-l" ]; then
+	for f in *; do
+		echo $f
+	done
+	exit 0
+fi
+
 nombre="$1"
 fecha=$(date +"%d-%m-%y")
 titulo="$nombre"\ $fecha
