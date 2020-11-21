@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 test -d ~/Documents/notas || mkdir ~/Documents/notas
 cd ~/Documents/notas
 
@@ -6,12 +6,26 @@ nombre="$1"\
 fecha=$(date +"%y-%m-%d")
 
 case "$1" in
-	"-l") for f in *; do
+	"-l") 
+		for f in *; do
 			echo $f
 		done
 		exit 0;;
 
-	"-o")$EDITOR "$2"; exit 0;;
+	"-o")
+		# TODO: una forma de buscar
+		n=0
+		lista=()
+		for f in *; do
+			echo $n") "$f
+			n=$(( $n + 1 ))
+			lista+=("${f}")
+		done
+		read i
+		toOpen="${lista[$i]}"
+		$EDITOR "$toOpen"
+		exit 0;;
+
 	"-r")rm "$2"; exit 0;;
 	"-p")nombre="$2"; fecha="";;
 esac
