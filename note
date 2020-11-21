@@ -1,5 +1,9 @@
 #!/bin/sh
+test -d ~/Documents/notas || mkdir ~/Documents/notas
 cd ~/Documents/notas
+
+nombre="$1"\ 
+fecha=$(date +"%y-%m-%d")
 
 case "$1" in
 	"-l") for f in *; do
@@ -9,15 +13,8 @@ case "$1" in
 
 	"-o")$EDITOR "$2"; exit 0;;
 	"-r")rm "$2"; exit 0;;
+	"-p")nombre="$2"; fecha="";;
 esac
-
-nombre="$1"\ 
-fecha=$(date +"%y-%m-%d")
-
-if [ $1 = "-p" ]; then
-	nombre="$2 "
-	fecha=""
-fi
 
 test "$1" = "" && titulo=$fecha || titulo="$nombre"$fecha
 
