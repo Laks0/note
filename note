@@ -13,6 +13,12 @@ esac
 
 nombre="$1"\ 
 fecha=$(date +"%y-%m-%d")
+
+if [ $1 = "-p" ]; then
+	nombre="$2 "
+	fecha=""
+fi
+
 test "$1" = "" && titulo=$fecha || titulo="$nombre"$fecha
 
 $EDITOR "$titulo"
