@@ -13,16 +13,17 @@ case "$1" in
 		exit 0;;
 
 	"-o")
-		# TODO: una forma de buscar
 		n=0
 		lista=()
 		for f in *; do
+			[[ "$f" == *"$2"* ]] || continue
 			echo $n") "$f
 			n=$(( $n + 1 ))
 			lista+=("${f}")
 		done
 		read i
 		toOpen="${lista[$i]}"
+		test -f "$toOpen" || exit 1;
 		$EDITOR "$toOpen"
 		exit 0;;
 
