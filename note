@@ -5,6 +5,22 @@ cd ~/Documents/notas
 nombre="$1"\ 
 fecha=$(date +"%y-%m-%d")
 
+selected=""
+sel () { 
+	n=0
+	lista=()
+	for f in *; do
+		[[ "$f" == *"$2"* ]] || continue
+		echo $n") "$f
+		n=$(( $n + 1 ))
+		lista+=("${f}")
+	done
+	read i
+	selected="${lista[$i]}"
+	test -f "$selected" || exit 1;
+}
+
+
 case "$1" in
 	"-l") 
 		for f in *; do
@@ -13,21 +29,11 @@ case "$1" in
 		exit 0;;
 
 	"-o")
-		n=0
-		lista=()
-		for f in *; do
-			[[ "$f" == *"$2"* ]] || continue
-			echo $n") "$f
-			n=$(( $n + 1 ))
-			lista+=("${f}")
-		done
-		read i
-		toOpen="${lista[$i]}"
-		test -f "$toOpen" || exit 1;
-		$EDITOR "$toOpen"
+		sel
+		$EDITOR "$selected"
 		exit 0;;
 
-	"-r")rm "$2"; exit 0;;
+	"-r")sel; rm "$selected"; exit 0;;
 	"-p")nombre="$2"; fecha="";;
 esac
 
