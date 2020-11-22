@@ -33,7 +33,7 @@ case "$1" in
 		$EDITOR "$selected"
 		exit 0;;
 
-	"-r")sel; rm "$selected"; exit 0;;
+	"-r")sel; echo "borrar nota $selected? [y/N]"; read i; test "$i" = "y" && rm "$selected"; exit 0;;
 	"-p")nombre="$2"; fecha="";;
 esac
 
