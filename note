@@ -35,6 +35,7 @@ case "$1" in
 
 	"-r")sel; echo "borrar nota $selected? [y/N]"; read i; test "$i" = "y" && rm "$selected"; exit 0;;
 	"-p")nombre="$2"; fecha="";;
+	"-h")echo "note [NOMBRE crea una nota con nombre {yy-mm-dd NOMBRE}] [-l lista de todas las notas] [-o seleccionar una nota para abrir] [-r seleccionar una nota para borrar] [-p NOMBRE crear una nueva nota sin la fecha en el nombre]"; exit 0;;
 esac
 
 test "$1" = "" && titulo=$fecha || titulo="$nombre"$fecha
