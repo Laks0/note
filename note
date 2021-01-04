@@ -5,19 +5,28 @@ cd ~/Documents/notas
 nombre="$1"\ 
 fecha=$(date +"%y-%m-%d")
 
+# OPCIONAL: programa de selección de archivos (fzf por defecto)
+selector="fzf"
+
 selected=""
 sel () { 
-	n=0
-	lista=()
-	for f in *; do
-		[[ "$f" == *"$2"* ]] || continue
-		echo $n") "$f
-		n=$(( $n + 1 ))
-		lista+=("${f}")
-	done
-	read i
-	selected="${lista[$i]}"
-	test -f "$selected" || exit 1;
+	#selector manual en caso de que el selector no esté instalado
+	if ! type "$selector" > /dev/null; then
+		n=0
+		lista=()
+		for f in *; do
+			[[ "$f" == *"$2"* ]] || continue
+			echo $n") "$f
+			n=$(( $n + 1 ))
+			lista+=("${f}")
+		done
+		read i
+		selected="${lista[$i]}"
+		test -f "$selected" || exit 1;
+	else
+		selected="$($selector)"
+		test -f "$selected" || exit 1;
+	fi
 }
 
 
