@@ -24,7 +24,8 @@ sel () {
 		selected="${lista[$i]}"
 		test -f "$selected" || exit 1;
 	else
-		selected="$($selector)"
+		# La opción bind es para que fzf funcione con teclas de vim, no necesariamente funciona con otros selectores
+		selected="$($selector --bind k:up,j:down --preview="cat {}")"
 		test -f "$selected" || exit 1;
 	fi
 }
